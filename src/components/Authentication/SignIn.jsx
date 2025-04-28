@@ -11,7 +11,7 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email === 'unofeeds@galaxeye.blue' && password === 'unofeeds@blue#1') {
+    if (email === 'director1@blueweight.com' && password === 'blueweight@123') {
       login();
     } else {
       setError('Invalid email or password');
