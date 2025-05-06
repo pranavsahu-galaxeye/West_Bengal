@@ -6,14 +6,14 @@ const ListComponent = ({ toggle }) => {
 
   useEffect(() => {
     // Fetch BIHAR_PONDS_MERGED GeoJSON data
-    fetch('/west_bengal_ponds.geojson')
+    fetch('/west_bengal_ponds_village.geojson')
       .then((response) => response.json())
       .then((data) => {
         const districtCounts = {}; // To store pond counts
         const districtAreas = {}; // To store total areas
 
         data.features.forEach((feature) => {
-          const district = feature.properties.DISTRICT || 'Unknown';
+          const district = feature.properties.VILLAGE || 'Unknown';
           const area = feature.properties.area || 0; // Ensure AREA is numeric
 
           districtCounts[district] = (districtCounts[district] || 0) + 1;
@@ -54,7 +54,7 @@ const ListComponent = ({ toggle }) => {
   return (
     <div className="list-container">
       <div className="list-header">
-        <span className="list-title">District</span>
+        <span className="list-title">Villages</span>
         <span className="list-value">
           {toggle === 'area' ? 'Area (Ha)' : 'Ponds'}
         </span>

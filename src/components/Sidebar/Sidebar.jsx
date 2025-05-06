@@ -19,7 +19,7 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchGeoJsonData = async () => {
       try {
-        const response = await fetch('/west_bengal_ponds.geojson');
+        const response = await fetch('/west_bengal_ponds_village.geojson');
         if (!response.ok) {
           throw new Error(`Failed to fetch GeoJSON: ${response.statusText}`);
         }

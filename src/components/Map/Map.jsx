@@ -113,11 +113,16 @@ const MapComponent = () => {
   const [hoverInfo, setHoverInfo] = useState(null);
   const [popupInfo, setPopupInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSatelliteView, setIsSatelliteView] = useState(false);
+
+  const toggleMapStyle = () => {
+    setIsSatelliteView((prev) => !prev);
+  };
 
   useEffect(() => {
     const promises = [
-      fetch("/west_bengal_subdistricts.geojson"),
-      fetch("/west_bengal_ponds.geojson"),
+      fetch("/westbengal.geojson"),
+      fetch("/west_bengal_ponds_village.geojson"),
     ];
 
     Promise.all(promises).then(async (result) => {
@@ -216,6 +221,23 @@ const MapComponent = () => {
 
   return (
     <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <button
+        onClick={toggleMapStyle}
+        style={{
+          position: "absolute",
+          bottom: 18,
+          left: 18,
+          zIndex: 1001,
+          padding: "8px 12px",
+          background: "#fff",
+          border: "1px solid #ccc",
+          borderRadius: "4px",
+          cursor: "pointer",
+        }}
+      >
+        {isSatelliteView ? "Switch to Streets" : "Switch to Satellite"}
+      </button>
+
       {isLoading && (
         <Box
           sx={{
@@ -242,9 +264,11 @@ const MapComponent = () => {
             zoom: 4,
           }}
           style={{ width: "100%", height: "100%" }}
-          mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${
-            import.meta.env.VITE_MAPTILER_KEY
-          }`}
+          mapStyle={
+            isSatelliteView
+              ? `https://api.maptiler.com/maps/hybrid/style.json?key=${import.meta.env.VITE_MAPTILER_KEY}`
+              : `https://api.maptiler.com/maps/streets/style.json?key=${import.meta.env.VITE_MAPTILER_KEY}`
+          }
           mapLib={maplibregl}
           interactiveLayerIds={["clusters", "unclustered-point"]}
           onMouseEnter={handleMouseEnter}
