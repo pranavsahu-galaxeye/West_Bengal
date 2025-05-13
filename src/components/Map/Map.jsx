@@ -107,6 +107,26 @@ const subdistrictsLineLayer = {
   },
 };
 
+const villagePolygonLabelLayer = {
+  id: "village-polygon-labels",
+  type: "symbol",
+  source: "subdistricts", // same source as the polygons
+  layout: {
+    "text-field": ["get", "VILLAGE"], // Ensure 'VILLAGE' exists in your properties
+    "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+    "text-size": 12,
+    "text-offset": [0, 0],
+    "text-anchor": "center"
+  },
+  paint: {
+    "text-color": "#000000",
+    "text-halo-color": "#ffffff",
+    "text-halo-width": 1
+  },
+  minzoom: 7
+};
+
+
 const MapComponent = () => {
   const [geojsonData, setGeojsonData] = useState(null);
   const [subdistrictsData, setSubdistrictsData] = useState(null);
@@ -279,6 +299,7 @@ const MapComponent = () => {
             <Source id="subdistricts" type="geojson" data={subdistrictsData}>
               <Layer {...subdistrictsLayer} />
               <Layer {...subdistrictsLineLayer} />
+              <Layer {...villagePolygonLabelLayer} /> 
             </Source>
           )}
 
