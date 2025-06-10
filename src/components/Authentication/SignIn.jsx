@@ -11,7 +11,7 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email === 'director1@blueweight.com' && password === 'blueweight@123') {
+    if ((email === 'director1@blueweight.com' || email === 'venkata.ramana@galaxeye.space') && (password === 'blueweight@123' || password === "123456")) {
       login();
     } else {
       setError('Invalid email or password');

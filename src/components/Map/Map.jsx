@@ -52,11 +52,11 @@ const clusterLayer = {
     "circle-color": [
       "step",
       ["get", "point_count"],
-      "#51bbd6",
+      "#51bbd64D",
       100,
-      "#f1f075",
+      "#f1f0754D",
       750,
-      "#f28cb1",
+      "#f28cb14D",
     ],
     "circle-radius": ["step", ["get", "point_count"], 20, 100, 30, 750, 40],
   },
@@ -103,7 +103,7 @@ const subdistrictsLineLayer = {
   source: "subdistricts",
   paint: {
     "line-color": "#000000",
-    "line-width": 2,
+    "line-width": 1,
   },
 };
 
